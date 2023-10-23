@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Ads(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    player = models.ForeignKey(User, on_delete=models.CASCADE)
     CAT = (('tanks', 'Танки'),
            ('healers', 'Хилы'),
            ('damage_dealers', 'ДД'),
