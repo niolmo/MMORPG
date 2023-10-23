@@ -13,19 +13,19 @@ from .tasks import respond_send_email, respond_accept_send_email
 
 class Index(ListView):
     model = Ads
-    template_name = 'index.html'
+    template_name = 'ads.html'
     context_object_name = 'posts'
 
 
 class PostItem(DetailView):
     model = Ads
-    template_name = 'post_item.html'
+    template_name = 'item.html'
     context_object_name = 'post'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if Response.objects.filter(author_id=self.request.user.id).filter(post_id=self.kwargs.get('pk')):
-            context['respond'] = "Откликнулся"
+            context['respond'] = "Ответить"
         elif self.request.user == Ads.objects.get(pk=self.kwargs.get('pk')).author:
             context['respond'] = "Мое_объявление"
         return context
@@ -33,7 +33,7 @@ class PostItem(DetailView):
 
 class CreatePost(LoginRequiredMixin, CreateView):
     model = Ads
-    template_name = 'create_post.html'
+    template_name = 'add.html'
     form_class = AdsForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -47,14 +47,14 @@ class CreatePost(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         post = form.save(commit=False)
-        post.author = User.objects.get(id=self.request.user.id)
+        post.player = User.objects.get(id=self.request.user.id)
         post.save()
         return redirect(f'/post/{post.id}')
 
 
 class EditPost(PermissionRequiredMixin, UpdateView):
     permission_required = 'board.change_post'
-    template_name = 'edit_post.html'
+    template_name = 'edit.html'
     form_class = AdsForm
     success_url = '/create/'
 
@@ -76,7 +76,7 @@ class EditPost(PermissionRequiredMixin, UpdateView):
 
 class DeletePost(PermissionRequiredMixin, DeleteView):
     permission_required = 'board.delete_post'
-    template_name = 'delete_post.html'
+    template_name = 'del.html'
     queryset = Ads.objects.all()
     success_url = '/index'
 

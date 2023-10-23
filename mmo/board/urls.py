@@ -4,10 +4,11 @@ from django.shortcuts import redirect
 from .views import Index, CreatePost, PostItem, EditPost, DeletePost, Responses, Respond, response_accept, \
     response_delete
 
+app_name = 'mmo_board'
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
-    path('post/<int:pk>', PostItem.as_view()),
+    path('post/<int:pk>', PostItem.as_view(), name='item'),
     path('create_ad', CreatePost.as_view(), name='create_ad'),
     path('post/<int:pk>/edit', EditPost.as_view()),
     path('post/<int:pk>/delete', DeletePost.as_view()),
