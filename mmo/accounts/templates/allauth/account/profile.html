@@ -9,10 +9,10 @@
     <br><br>
     <h3>Ваш профиль: </h3>
     <br>
-    <h5>User name: {{user.username}}</h5>
-    <h5>Last name: {{user.last_name}}</h5>
-    <h5>First name: {{user.first_name}}</h5>
-    <h5>E-mail: {{user.email}}</h5>
+    <h5 class="text-white">User name: {{user.username}}</h5>
+    <h5 class="text-white">Last name: {{user.last_name}}</h5>
+    <h5 class="text-white">First name: {{user.first_name}}</h5>
+    <h5 class="text-white">E-mail: {{user.email}}</h5>
 
     <br> <br>
     <a class="btn btn-secondary" href="{% url 'account_edit' %}" role="button">Изменить даные</a>
@@ -21,7 +21,7 @@
 
     <br><br><br>
     {% if auth == False %}
-        <h5>Для завершения регистрации, введите код подтверждения,<br>
+        <h5 class="text-white">Для завершения регистрации, введите код подтверждения,<br>
             высланный на указанную Вами электронную почту:</h5><br>
         <form method="POST">
             {% csrf_token %}
@@ -33,8 +33,8 @@
             <a href="{% url 'auth_code' %}" style="font-size: 16px; color:blue">Выслать новый код</a>
         {% endif %}
     {% else %}
-        <h5>Ваша электронная почта подтверждена</h5>
-        <a>Вы можете размещать новые объявления и делать отклики</a><br>
+        <h5 class="text-white">Ваша электронная почта подтверждена</h5>
+        <a class="text-white">Вы можете размещать новые объявления и делать отклики</a><br>
     {% endif %}
 
 {% endblock %}
