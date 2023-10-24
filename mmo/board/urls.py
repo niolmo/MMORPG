@@ -17,5 +17,5 @@ urlpatterns = [
     path('respond/<int:pk>', Respond.as_view(), name='respond'),
     path('response/accept/<int:pk>', response_accept),
     path('response/delete/<int:pk>', response_delete),
-    path('', lambda request: redirect('index', permanent=False)),
+
 ]

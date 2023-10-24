@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'board.apps.BoardConfig',
+    'accounts.apps.AccountsConfig',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 
 ]
 
@@ -226,7 +228,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "test.niolmo@yandex.ru"
-EMAIL_HOST_PASSWORD = "t123456est"
+EMAIL_HOST_PASSWORD = "cfkfejtqgingkyts"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
@@ -256,5 +258,11 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 SITE_ID = 1
